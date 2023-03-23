@@ -1,4 +1,7 @@
 use std::fmt;
+mod functions;
+
+pub use crate::functions::functions_module;
 const TEST_CONSTANT: u32 = 200;
 fn main() {
     let mut x = 5;
@@ -20,8 +23,10 @@ fn main() {
         println!("{y}");
     }
     println!("{y}");
-
     datatypes();
+    //Functions from Function chapter in a module lmaoo
+    functions_module::test();
+    functions_module::parameter(39);
 }
 
 struct Matrix2D(i32, i32, i32, i32);
@@ -39,4 +44,8 @@ fn datatypes() {
     println!("Float: {float}");
     let matrix = Matrix2D(2, 2, 2, 2);
     println!("Matrix struct: \n {matrix}");
+    let tup: (i32, f64, u8) = (600, 3.5, 8);
+    println!("Tuple variable X: {}", tup.0);
+    let a: [i32; 5] = [1, 2, 3, 4, 5];
+    println!("Arrays: {},{}", a[0], a[1]);
 }
