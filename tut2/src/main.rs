@@ -1,6 +1,8 @@
 use std::fmt;
+mod control_flow;
 mod functions;
 
+pub use crate::control_flow::control_flow_module;
 pub use crate::functions::functions_module;
 const TEST_CONSTANT: u32 = 200;
 fn main() {
@@ -27,6 +29,12 @@ fn main() {
     //Functions from Function chapter in a module lmaoo
     functions_module::test();
     functions_module::parameter(39);
+    functions_module::statements();
+    let stuff = functions_module::return_variable();
+    println!("{stuff}");
+
+    //Controll flow functions
+    control_flow_module::ifelse();
 }
 
 struct Matrix2D(i32, i32, i32, i32);
