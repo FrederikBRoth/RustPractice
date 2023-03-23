@@ -37,4 +37,6 @@ fn datatypes() {
     println!("Integers: {int}");
     let float: f32 = 3.0;
     println!("Float: {float}");
+    let matrix = Matrix2D(2, 2, 2, 2);
+    println!("Matrix struct: \n {matrix}");
 }
