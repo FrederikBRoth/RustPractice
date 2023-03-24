@@ -34,7 +34,9 @@ fn main() {
     println!("{stuff}");
 
     //Controll flow functions
+
     control_flow_module::ifelse();
+    control_flow_module::ifelseif(10);
 }
 
 struct Matrix2D(i32, i32, i32, i32);
