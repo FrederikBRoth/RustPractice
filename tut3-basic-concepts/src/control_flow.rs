@@ -76,10 +76,14 @@ pub mod control_flow_module {
 
     pub fn forloop() {
         let a = [20, 10, 30, 40];
-        let mut index = 0;
 
         for element in a {
             println!("{element}");
+        }
+    }
+    pub fn forrange() {
+        for n in 1..10 {
+            println!("{n}");
         }
     }
 }

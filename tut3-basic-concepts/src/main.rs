@@ -14,7 +14,7 @@ fn main() {
 
     //Shadowing example
     let y = 5;
-    println!("{y}");
+    println!("{}", y);
     let y = y + 5;
 
     println!("Shadowed Y : {y}");
@@ -31,7 +31,19 @@ fn main() {
     functions_module::parameter(39);
     functions_module::statements();
     let stuff = functions_module::return_variable();
+
     println!("{stuff}");
+
+    //Control flow functions
+    control_flow_module::iflet();
+    control_flow_module::loops();
+    control_flow_module::ifelse();
+
+    control_flow_module::forloop();
+    control_flow_module::forrange();
+    control_flow_module::ifelseif(10);
+    control_flow_module::whileloop();
+    control_flow_module::looplabels();
 }
 
 struct Matrix2D(i32, i32, i32, i32);
