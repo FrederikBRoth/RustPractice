@@ -9,6 +9,17 @@ pub mod area {
         pub fn area(&self) -> u32 {
             self.width * self.height
         }
+
+        pub fn can_contain(&self, other: Rectangle) -> bool {
+            self.width > other.width && self.height > other.height
+        }
+
+        pub fn square(size: u32) -> Self {
+            Self {
+                width: size,
+                height: size,
+            }
+        }
     }
 
     pub fn calc_area(width: u32, height: u32) -> u32 {

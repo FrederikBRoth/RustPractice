@@ -49,11 +49,29 @@ fn main() {
         width: 30,
         height: 30,
     };
-
+    let rect2 = area::Rectangle {
+        width: 20,
+        height: 10,
+    };
+    let rect3 = area::Rectangle {
+        width: 40,
+        height: 20,
+    };
     println!("Area of rect = {}", area::calc_area_struct(&rect1));
     println!("Rectangle: {:?}", rect1);
 
     println!("Area of Rectangle: {}", rect1.area());
+
+    //Multiple parameters in impl functions
+
+    println!("Does rect1 contain rect2: {}", rect1.can_contain(rect2));
+    println!("Does rect1 contain rect3: {}", rect1.can_contain(rect3));
+
+    //You can make associated functions that are used as constructors. Can be evoked such as how
+    //static functions are evoked in other languages
+
+    let sq = area::Rectangle::square(20);
+    println!("Size of square, {:?}", sq);
 }
 
 fn build_user(email: String, username: String) -> User {
