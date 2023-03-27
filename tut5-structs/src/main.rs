@@ -52,6 +52,8 @@ fn main() {
 
     println!("Area of rect = {}", area::calc_area_struct(&rect1));
     println!("Rectangle: {:?}", rect1);
+
+    println!("Area of Rectangle: {}", rect1.area());
 }
 
 fn build_user(email: String, username: String) -> User {

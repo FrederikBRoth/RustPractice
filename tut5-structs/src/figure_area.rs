@@ -5,6 +5,12 @@ pub mod area {
         pub height: u32,
     }
 
+    impl Rectangle {
+        pub fn area(&self) -> u32 {
+            self.width * self.height
+        }
+    }
+
     pub fn calc_area(width: u32, height: u32) -> u32 {
         width * height
     }
