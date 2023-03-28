@@ -1,3 +1,8 @@
+#[cfg(not(test))]
+pub const OS_RELEASE_FILE_PATH: &str = "/etc/os-release";
+#[cfg(test)]
+pub const OS_RELEASE_FILE_PATH: &str = "/tmp/fake-etc-os-release-file";
+
 use std::option::Option;
 fn main() {
     #[derive(Debug)]
