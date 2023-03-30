@@ -1,14 +1,15 @@
-use clap::{Parser, ValueEnum};
+use clap::Parser;
+use clap::ValueEnum;
+use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
-
 #[derive(ValueEnum, Clone, Debug)]
 enum Mode {
     Read,
     Write,
 }
-
 #[derive(Parser, Debug)]
 #[command(author, version, about)]
+
 struct Opt {
     #[clap(value_enum, default_value_t=Mode::Read)]
     mode: Mode,
@@ -16,6 +17,11 @@ struct Opt {
     word: String,
 }
 
+#[derive(Serialize, Deserialize, Debug)]
+struct Word {
+    base: String,
+    translation: String,
+}
 fn main() {
     let args = Opt::parse();
     let words = HashMap::from([
@@ -24,7 +30,6 @@ fn main() {
         ("chinchin", "dick"),
     ]);
     println!("Yo write in a word to get translated");
-
     match args.mode {
         Mode::Read => {
             println!("Reads the current file")
@@ -43,10 +48,7 @@ fn main() {
     }
 }
 
-#[cfg(test)]
-mod tests {
-    #[test]
-    fn testtest() {
-        println!("This is a test");
-    }
+#[test]
+fn test() {
+    println!("yoooooooo")
 }

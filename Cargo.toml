@@ -1,0 +1,9 @@
+[workspace]
+members = [
+  "midway-exercise",
+  "tut3-basic-concepts",
+  "tut4-ownership",
+  "tut5-structs",
+  "tut6-enums-and-patterns",
+  "tut7-modules"
+]

@@ -1,3 +1,4 @@
+use rand;
 use std::fmt;
 mod control_flow;
 mod functions;
