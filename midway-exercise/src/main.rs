@@ -1,19 +1,32 @@
+use clap::Args;
 use clap::Parser;
-use clap::ValueEnum;
+use clap::Subcommand;
+
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
-#[derive(ValueEnum, Clone, Debug)]
+use std::fs::File;
+use std::io::{Read, Result, Write};
+use std::path::Path;
+#[derive(Subcommand)]
 enum Mode {
-    Read,
-    Write,
+    Read(ReadArgs),
+    Write(WriteArgs),
 }
-#[derive(Parser, Debug)]
+#[derive(Parser)]
 #[command(author, version, about)]
 
 struct Opt {
-    #[clap(value_enum, default_value_t=Mode::Read)]
+    #[command(subcommand)]
     mode: Mode,
-    #[arg(long, default_value = "gaijin")]
+}
+#[derive(Args)]
+struct WriteArgs {
+    word: String,
+    translation: String,
+}
+
+#[derive(Args)]
+struct ReadArgs {
     word: String,
 }
 
@@ -22,30 +35,52 @@ struct Word {
     base: String,
     translation: String,
 }
+
 fn main() {
     let args = Opt::parse();
-    let words = HashMap::from([
-        ("gaijin", "foreigner"),
-        ("baka", "viktor"),
-        ("chinchin", "dick"),
-    ]);
     println!("Yo write in a word to get translated");
+    let mut map = load_json("./midway-exercise/test");
     match args.mode {
-        Mode::Read => {
-            println!("Reads the current file")
+        Mode::Read(args) => match map.get(&args.word) {
+            Some(t) => println!("Translation of the word '{}' is '{}'", args.word, t),
+            None => println!("Word doesn't exist in the wordlist!"),
+        },
+        Mode::Write(args) => {
+            match map.get(&args.word) {
+                Some(_) => println!("Word already in wordlist!"),
+                None => {
+                    map.insert(args.word, args.translation);
+                    let _ = save_json("./midway-exercise/test", map);
+                }
+            }
+
+            //            let _ = save_json("./midway-exercise/test", words);
         }
-        Mode::Write => {
-            let word: &str = &args.word;
-            if let Some(w) = words.get(word) {
-                println!("Translated word biiitch: {}", w);
-            } else {
-                println!(
-                    "Our very expansive wordlist doesn't contain the word: {}",
-                    word
-                );
+    }
+}
+
+//The '?' basically cuts down the match (or if let) to a single line instead of multiple. Both ways
+//is illustrated below
+fn save_json<P: AsRef<Path>>(path: P, map: HashMap<String, String>) -> Result<()> {
+    let mut file = match File::create(path) {
+        Ok(f) => f,
+        Err(e) => return Err(e),
+    };
+    let buf = serde_json::to_vec(&map)?;
+    file.write_all(&buf[..])?;
+    Ok(())
+}
+
+fn load_json<P: AsRef<Path>>(path: P) -> HashMap<String, String> {
+    if let Ok(mut file) = File::open(path) {
+        let mut buffer = vec![];
+        if file.read_to_end(&mut buffer).is_ok() {
+            if let Ok(map) = serde_json::from_slice(&buffer[..]) {
+                return map;
             }
         }
     }
+    HashMap::new()
 }
 
 #[test]
