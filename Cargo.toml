@@ -5,5 +5,8 @@ members = [
   "tut4-ownership",
   "tut5-structs",
   "tut6-enums-and-patterns",
-  "tut7-modules"
+  "tut7-modules",
+  "tut13-func-lang-features",
+  "tut15-smart-pointers",
+  "tut16-concurrency"
 ]

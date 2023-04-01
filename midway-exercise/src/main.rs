@@ -45,22 +45,18 @@ fn main() {
             Some(t) => println!("Translation of the word '{}' is '{}'", args.word, t),
             None => println!("Word doesn't exist in the wordlist!"),
         },
-        Mode::Write(args) => {
-            match map.get(&args.word) {
-                Some(_) => println!("Word already in wordlist!"),
-                None => {
-                    map.insert(args.word, args.translation);
-                    let _ = save_json("./midway-exercise/test", map);
-                }
+        Mode::Write(args) => match map.get(&args.word) {
+            Some(_) => println!("Word already in wordlist!"),
+            None => {
+                map.insert(args.word, args.translation);
+                let _ = save_json("./midway-exercise/test", map);
             }
-
-            //            let _ = save_json("./midway-exercise/test", words);
-        }
+        },
     }
 }
 
 //The '?' basically cuts down the match (or if let) to a single line instead of multiple. Both ways
-//is illustrated below
+//are illustrated below
 fn save_json<P: AsRef<Path>>(path: P, map: HashMap<String, String>) -> Result<()> {
     let mut file = match File::create(path) {
         Ok(f) => f,
