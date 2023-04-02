@@ -10,7 +10,7 @@ fn main() {
     }
 
     println!("m = {:?}", m);
-
+    //Arc stands for atomic reference counter. Atomics you know what is.
     let counter = Arc::new(Mutex::new(0));
     let mut handles = vec![];
 

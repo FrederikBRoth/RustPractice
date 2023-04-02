@@ -8,5 +8,6 @@ members = [
   "tut7-modules",
   "tut13-func-lang-features",
   "tut15-smart-pointers",
-  "tut16-concurrency"
+  "tut16-concurrency",
+  "thread-assignment"
 ]
